@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "outDir": "public/build",
+    "target": "es5",
+    "esModuleInterop": true,
+    "strict": true,
+    "module": "es6",
+    "moduleResolution": "node",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "types": ["@pyoner/svelte-types"]
+  }
+}
