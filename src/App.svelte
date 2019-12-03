@@ -5,4 +5,4 @@
   export let subtitle: string;
 </script>
 
-<Page title = {title} subtitle={subtitle} />
+<Page {title} {subtitle} />

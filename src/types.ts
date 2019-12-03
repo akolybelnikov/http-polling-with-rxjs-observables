@@ -1,4 +1,6 @@
 export interface Joke {
-    fav: boolean;
-    text: string;
+    id: number;
+    categories: string[];
+    joke: string;
+    favourite?: boolean;
 }

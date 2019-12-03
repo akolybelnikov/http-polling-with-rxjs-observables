@@ -1,9 +1,15 @@
 <script lang="ts">
+  import { jokes } from "./store.js";
+  import { makeRequest } from "./observables.ts";
   import JokeList from "./JokeList.svelte";
   import FavoriteList from "./FavoriteList.svelte";
 
   export let title: string;
   export let subtitle: string;
+
+  function fetchJokes() {
+    makeRequest(10).subscribe(data => jokes.set(data));
+  }
 </script>
 
 <section class="section">
@@ -14,7 +20,7 @@
   <div class="box">
     <nav class="level">
       <div class="level-item">
-        <button id="fetch10" class="button is-info">
+        <button id="fetch10" class="button is-info" on:click={fetchJokes}>
           Fetch 10 random jokes
         </button>
       </div>
