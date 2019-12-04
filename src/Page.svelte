@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { jokes } from "./store.js";
+  import { jokes } from "./store.ts";
   import { makeRequest } from "./observables.ts";
   import JokeList from "./JokeList.svelte";
   import FavoriteList from "./FavoriteList.svelte";

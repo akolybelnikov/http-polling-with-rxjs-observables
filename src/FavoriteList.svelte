@@ -1,6 +1,7 @@
 <script lang="ts">
   import JokeElement from "./JokeElement.svelte";
-  import { favourites } from "./store.js";
+  // @ts-ignore
+  import { favourites } from "./store.ts";
 </script>
 
 {#if $favourites.length}

@@ -1,15 +1,24 @@
 <script lang="ts">
-  import { jokes } from "./store.js";
+  import { fade, fly } from "svelte/transition";
+  // @ts-ignore
+  import { jokes } from "./store.ts";
+  // @ts-ignore
   import { Joke } from "./types.ts";
   import JokeElement from "./JokeElement.svelte";
 </script>
 
 {#if $jokes.length}
   <div class="box">
-    <!-- <span class="tag is-light is-medium is-pulled-right">Mark as favourite</span> -->
     <div id="jokes" class="list">
+      <div class="list-item has-text-right">
+        <span class="tag is-success is-light is-medium">
+          Check to save to your favourites
+        </span>
+      </div>
       {#each $jokes as item, index}
-        <JokeElement {item} {index} />
+        <div in:fade={{ duration: 500 }} out:fade={{ duration: 500 }}>
+          <JokeElement {item} {index} />
+        </div>
       {/each}
     </div>
   </div>

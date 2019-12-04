@@ -1,23 +1,21 @@
 <script lang="ts">
-  import { get } from "svelte/store";
+  import { afterUpdate } from "svelte";
+  // @ts-ignore
   import { Joke } from "./types.ts";
-  import { fade, fly } from "svelte/transition";
-  import { jokes } from "./store.js";
+  // @ts-ignore
+  import { jokes } from "./store.ts";
 
   export let item: Joke;
   export let index: number;
 
-  let fav: boolean = item.favourite;
+  let saved: boolean = item.saved;
 
-  function onChecked(): void {
-    const current_10: Joke[] = get(jokes);
-    console.table(current_10)
-    const fav_index: number = current_10.findIndex(
-      (j: Joke) => j.id === item.id
-    );
-    console.log(fav_index)
-    current_10.splice(fav_index, 1)
-    jokes.set(current_10);
+  afterUpdate(() => {
+    console.log(`Item "${item.id}" updated: "${item.saved}"`);
+  });
+
+  function onChange(): void {
+    jokes.updateProp(item.id, !item.saved);
   }
 </script>
 
@@ -61,24 +59,30 @@
   }
 </style>
 
-{#if !fav}
-  <div class="list-item" in:fade out:fly={{ x: -300, duration: 1000 }}>
-    <article class="media">
-      <div class="media-left">
-        <span class="button is-link is-light is-rounded">{index + 1}</span>
+<svelte:options immutable={true} />
+
+<div class="list-item" class:has-background-grey-lighter={saved}>
+  <article class="media">
+    <div class="media-left">
+      <span
+        class:is-link={!saved}
+        class:is-primary={saved}
+        class="button is-light is-rounded">
+        {index + 1}
+      </span>
+    </div>
+    <div class="media-content">
+      <div class="content">
+        <p
+          class:has-text-grey-dark={!saved}
+          class="is-size-4 is-size-5-mobile has-text-centered"
+          class:has-text-grey-darker={saved}>
+          {item ? item.joke.replace(/&quot;/g, '"') : ''}
+        </p>
       </div>
-      <div class="media-content">
-        <div class="content">
-          <p
-            class="has-text-grey-dark is-size-4 is-size-5-mobile
-            has-text-centered">
-            {item ? item.joke.replace(/&quot;/g, '"') : ''}
-          </p>
-        </div>
-      </div>
-      <div class="media-right">
-        <input type="checkbox" bind:checked={fav} on:change={onChecked} />
-      </div>
-    </article>
-  </div>
-{/if}
+    </div>
+    <div class="media-right">
+      <input type="checkbox" bind:checked={saved} on:change={onChange} />
+    </div>
+  </article>
+</div>
