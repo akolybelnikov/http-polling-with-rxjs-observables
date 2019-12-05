@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { afterUpdate } from "svelte";
+  //import { afterUpdate } from "svelte";
   // @ts-ignore
   import { Joke } from "./types.ts";
   // @ts-ignore
@@ -8,15 +8,13 @@
   export let item: Joke;
   export let index: number;
 
-  let saved: boolean = item.saved;
+  // afterUpdate(() => {
+  //   console.log(`Item "${item.id}" updated: "${item.saved}"`);
+  // });
 
-  afterUpdate(() => {
-    console.log(`Item "${item.id}" updated: "${item.saved}"`);
-  });
-
-  function onChange(): void {
-    jokes.updateProp(item.id, !item.saved);
-  }
+  const onChange = (): void => {
+    jokes.updateProp(item.id, item.saved);
+  };
 </script>
 
 <style>
@@ -61,12 +59,12 @@
 
 <svelte:options immutable={true} />
 
-<div class="list-item" class:has-background-grey-lighter={saved}>
+<div class="list-item" class:has-background-grey-lighter={item.saved}>
   <article class="media">
     <div class="media-left">
       <span
-        class:is-link={!saved}
-        class:is-primary={saved}
+        class:is-link={item.saved}
+        class:is-primary={item.saved}
         class="button is-light is-rounded">
         {index + 1}
       </span>
@@ -74,15 +72,15 @@
     <div class="media-content">
       <div class="content">
         <p
-          class:has-text-grey-dark={!saved}
+          class:has-text-grey-dark={item.saved}
           class="is-size-4 is-size-5-mobile has-text-centered"
-          class:has-text-grey-darker={saved}>
+          class:has-text-grey-darker={item.saved}>
           {item ? item.joke.replace(/&quot;/g, '"') : ''}
         </p>
       </div>
     </div>
     <div class="media-right">
-      <input type="checkbox" bind:checked={saved} on:change={onChange} />
+      <input type="checkbox" bind:checked={item.saved} on:change={onChange} />
     </div>
   </article>
 </div>

@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { jokes } from "./store.ts";
+  import { jokes, favourites } from "./store.ts";
+  import { get } from "svelte/store";
   import { makeRequest } from "./observables.ts";
   import JokeList from "./JokeList.svelte";
   import FavoriteList from "./FavoriteList.svelte";
@@ -8,7 +9,17 @@
   export let subtitle: string;
 
   function fetchJokes() {
-    makeRequest(10).subscribe(data => jokes.set(data));
+    makeRequest(10).subscribe(data => {
+      const storedJokes = get(favourites);
+      const fromApi = data.map(joke => {
+        const inFavourites = storedJokes.find(j => j.id === joke.id);
+        console.log(inFavourites)
+        return inFavourites
+          ? { ...joke, saved: true }
+          : { ...joke, saved: false };
+      });
+      jokes.set(fromApi);
+    });
   }
 </script>
 

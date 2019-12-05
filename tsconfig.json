@@ -3,11 +3,12 @@
     "outDir": "public/build",
     "target": "es6",
     "esModuleInterop": true,
-    "strict": true,
+    "strict": false,
     "module": "es6",
     "moduleResolution": "node",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["@pyoner/svelte-types"]
+    "types": ["@pyoner/svelte-types"],
+    "noUnusedLocals": false
   }
 }

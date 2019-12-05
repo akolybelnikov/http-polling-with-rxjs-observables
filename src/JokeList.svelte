@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { fade, fly } from "svelte/transition";
+  import { fade } from "svelte/transition";
   // @ts-ignore
   import { jokes } from "./store.ts";
   // @ts-ignore
