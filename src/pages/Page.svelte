@@ -1,9 +1,11 @@
 <script lang="ts">
-  import { jokes, favourites } from "./store.ts";
   import { get } from "svelte/store";
-  import { makeRequest } from "./observables.ts";
-  import JokeList from "./JokeList.svelte";
-  import FavoriteList from "./FavoriteList.svelte";
+  // @ts-ignore
+  import { jokes, favourites } from "../store.ts";
+  // @ts-ignore
+  import { makeRequest } from "../observables.ts";
+  import JokeList from "../components/JokeList.svelte";
+  import FavoriteList from "../components/FavoriteList.svelte";
 
   export let title: string;
   export let subtitle: string;
@@ -13,7 +15,7 @@
       const storedJokes = get(favourites);
       const fromApi = data.map(joke => {
         const inFavourites = storedJokes.find(j => j.id === joke.id);
-        console.log(inFavourites)
+        console.log(inFavourites);
         return inFavourites
           ? { ...joke, saved: true }
           : { ...joke, saved: false };

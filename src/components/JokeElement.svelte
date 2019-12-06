@@ -1,9 +1,9 @@
 <script lang="ts">
   //import { afterUpdate } from "svelte";
   // @ts-ignore
-  import { Joke } from "./types.ts";
+  import { Joke } from "../types.ts";
   // @ts-ignore
-  import { jokes } from "./store.ts";
+  import { jokes } from "../store.ts";
 
   export let item: Joke;
   export let index: number;

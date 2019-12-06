@@ -1,9 +1,9 @@
 <script lang="ts">
   import { fade } from "svelte/transition";
   // @ts-ignore
-  import { jokes } from "./store.ts";
+  import { jokes } from "../store.ts";
   // @ts-ignore
-  import { Joke } from "./types.ts";
+  import { Joke } from "../types.ts";
   import JokeElement from "./JokeElement.svelte";
 </script>
 

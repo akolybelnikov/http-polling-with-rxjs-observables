@@ -1,14 +1,21 @@
 {
   "name": "http-polling-with-observables",
   "version": "1.0.0",
+  "main": "babel.config.js",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public"
+    "start": "sirv public",
+    "test": "jest --watch src"
   },
   "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
     "@pyoner/svelte-ts-preprocess": "^1.2.1",
     "@pyoner/svelte-types": "^3.4.4-2",
+    "@testing-library/svelte": "^1.9.1",
+    "@types/jest": "^24.0.23",
+    "jest": "^24.9.0",
     "rollup": "^1.12.0",
     "rollup-plugin-commonjs": "^10.0.0",
     "rollup-plugin-livereload": "^1.0.0",
@@ -17,7 +24,9 @@
     "rollup-plugin-terser": "^5.1.2",
     "rollup-plugin-typescript2": "^0.25.2",
     "svelte": "^3.0.0",
-    "typescript": "^3.7.2"
+    "svelte-jester": "^1.0.3",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.7.3"
   },
   "dependencies": {
     "rxjs": "^6.5.3",

@@ -5,10 +5,12 @@
     "esModuleInterop": true,
     "strict": false,
     "module": "es6",
+    "lib": ["es6", "dom"],
     "moduleResolution": "node",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "types": ["@pyoner/svelte-types"],
     "noUnusedLocals": false
-  }
+  },
+  "include": ["src"]
 }

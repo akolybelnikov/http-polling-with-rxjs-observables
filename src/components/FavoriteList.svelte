@@ -2,7 +2,7 @@
   import { fade } from "svelte/transition";
   import JokeElement from "./JokeElement.svelte";
   // @ts-ignore
-  import { favourites } from "./store.ts";
+  import { favourites } from "../store.ts";
 
   favourites.useLocalStorage();
 </script>
