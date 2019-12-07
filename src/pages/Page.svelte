@@ -1,11 +1,10 @@
 <script lang="ts">
   import { get } from "svelte/store";
   // @ts-ignore
-  import { jokes, favourites } from "../store.ts";
-  // @ts-ignore
-  import { makeRequest } from "../observables.ts";
+  import { jokes } from "../store.ts";
   import JokeList from "../components/JokeList.svelte";
   import FavoriteList from "../components/FavoriteList.svelte";
+  import ActionsLevel, { fetchJokes } from "../components/ActionsLevel.svelte";
 
   export let title: string;
   export let subtitle: string;
@@ -18,22 +17,8 @@
 
   function setRandomTab() {
     const randomList = get(jokes);
-    randomList.length ? (favouritesTab = false) : fetchJokes();
-  }
-
-  function fetchJokes() {
-    favouritesTab = false
-    makeRequest(10).subscribe(data => {
-      const storedJokes = get(favourites);
-      const fromApi = data.map(joke => {
-        const inFavourites = storedJokes.find(j => j.id === joke.id);
-
-        return inFavourites
-          ? { ...joke, saved: true }
-          : { ...joke, saved: false };
-      });
-      jokes.set(fromApi);
-    });
+    if (!randomList.length) fetchJokes();
+    favouritesTab = false;
   }
 </script>
 
@@ -48,18 +33,7 @@
     <h1 class="title">{title}</h1>
     <p class="subtitle">{subtitle}</p>
   </div>
-  <div class="box">
-    <nav class="level is-mobile">
-      <div class="level-item">
-        <button id="fetch10" class="button is-info" on:click={fetchJokes}>
-          Fetch jokes
-        </button>
-      </div>
-      <div class="level-item">
-        <button id="startBtn" class="button is-success">Poll jokes</button>
-      </div>
-    </nav>
-  </div>
+
   <div class="tabs is-fullwidth is-medium is-toggle" role="tablist">
     <ul>
       <li class="is-active">
@@ -68,8 +42,8 @@
           class:is-light={!favouritesTab}
           class:is-white={favouritesTab}
           role="tab"
-          aria-controls="tabpanel-id"
-          aria-selected="false"
+          aria-controls="favourites-panel"
+          aria-selected={favouritesTab}
           on:click={setFavouritesTab}
           id="favourites">
           My favourite jokes
@@ -81,8 +55,8 @@
           class:is-light={favouritesTab}
           class:is-white={!favouritesTab}
           role="tab"
-          aria-controls="tabpanel-id"
-          aria-selected="true"
+          aria-controls="random-panel"
+          aria-selected={!favouritesTab}
           on:click={setRandomTab}
           id="random">
           10 random jokes
@@ -90,11 +64,15 @@
       </li>
     </ul>
   </div>
-  <div role="tabpanel">
-    {#if favouritesTab}
+
+  {#if favouritesTab}
+    <div role="tabpanel" id="favourites-panel">
       <FavoriteList />
-    {:else}
+    </div>
+  {:else}
+    <div role="tabpanel" id="random-panel">
+      <ActionsLevel />
       <JokeList />
-    {/if}
-  </div>
+    </div>
+  {/if}
 </section>
