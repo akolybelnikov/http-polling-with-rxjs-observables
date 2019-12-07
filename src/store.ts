@@ -1,4 +1,4 @@
-import { writable, derived } from 'svelte/store'
+import { writable } from 'svelte/store'
 import { Joke } from './types'
 
 const data: Joke[] = []

@@ -7,14 +7,12 @@
   import JokeElement from "./JokeElement.svelte";
 </script>
 
-{#if $jokes.length}
-  <div class="box">
-    <div id="jokes" class="list">
-      {#each $jokes as item, index (item.id)}
-        <div in:fade={{ duration: 250 }} out:fade={{ duration: 250 }}>
-          <JokeElement {item} {index} />
-        </div>
-      {/each}
-    </div>
+<div class="box">
+  <div id="jokes" class="list">
+    {#each $jokes as item, index (item.id)}
+      <div in:fade={{ duration: 250 }} out:fade={{ duration: 250 }}>
+        <JokeElement {item} {index} />
+      </div>
+    {/each}
   </div>
-{/if}
+</div>
