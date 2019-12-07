@@ -6,25 +6,25 @@ import { terser } from 'rollup-plugin-terser'
 import typescript from 'rollup-plugin-typescript2'
 
 import {
-	preprocess,
-	createEnv,
-	readConfigFile
-  } from "@pyoner/svelte-ts-preprocess";
+  preprocess,
+  createEnv,
+  readConfigFile,
+} from '@pyoner/svelte-ts-preprocess'
 
 const production = !process.env.ROLLUP_WATCH
 
-const env = createEnv();
-const compilerOptions = readConfigFile(env);
+const env = createEnv()
+const compilerOptions = readConfigFile(env)
 const opts = {
   env,
   compilerOptions: {
     ...compilerOptions,
-    allowNonTsExtensions: true
-  }
-};
+    allowNonTsExtensions: true,
+  },
+}
 
 export default {
-  input: 'src/main.js',
+  input: 'src/main.ts',
   output: {
     sourcemap: true,
     format: 'iife',
@@ -36,8 +36,12 @@ export default {
       dev: !production,
       css: css => {
         css.write('public/build/bundle.css')
-	  },
-	  preprocess: preprocess(opts)
+      },
+      preprocess: preprocess(opts),
+      onwarn: (warning, handler) => {
+        if ((warning.code = 'a11y-missing-attribute')) return
+        handler(warning)
+      },
     }),
     resolve({
       browser: true,

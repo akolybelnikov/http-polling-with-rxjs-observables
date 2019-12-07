@@ -1,3 +1,4 @@
+<svelte:options immutable />
 <script lang="ts">
   //import { afterUpdate } from "svelte";
   // @ts-ignore
@@ -40,7 +41,6 @@
   }
   input:checked:after {
     content: "\2714";
-    font-size: 14px;
     position: absolute;
     top: 0px;
     color: #48c774;
@@ -52,20 +52,18 @@
       padding: 12px;
     }
     input:checked:after {
-      font-size: 14px;
+      font-size: 18px;
     }
   }
 </style>
 
-<svelte:options immutable={true} />
-
-<div class="list-item" class:has-background-grey-lighter={item.saved}>
+<div class="list-item" class:has-background-light={item.saved}>
   <article class="media">
     <div class="media-left">
       <span
-        class:is-link={item.saved}
         class:is-primary={item.saved}
-        class="button is-light is-rounded">
+        class:is-light={!item.saved}
+        class="button is-rounded">
         {index + 1}
       </span>
     </div>
@@ -73,7 +71,7 @@
       <div class="content">
         <p
           class:has-text-grey-dark={item.saved}
-          class="is-size-4 is-size-5-mobile has-text-centered"
+          class="is-size-4-desktop is-size-5-tablet is-size-6-mobile has-text-centered"
           class:has-text-grey-darker={item.saved}>
           {item ? item.joke.replace(/&quot;/g, '"') : ''}
         </p>

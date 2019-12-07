@@ -12,7 +12,7 @@
     <div id="jokes" class="list is-hoverable">
       <div class="list-item">
         {#each $favourites as item}
-          <div in:fade={{ duration: 500 }} out:fade={{ duration: 500 }}>
+          <div in:fade={{ duration: 300 }}>
             <p>{item.id}</p>
           </div>
         {/each}
