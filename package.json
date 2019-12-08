@@ -36,10 +36,12 @@
   },
   "dependencies": {
     "rxjs": "^6.5.3",
-    "sirv-cli": "^0.4.4",
-    "svelte-extras": "^2.0.2"
+    "sirv-cli": "^0.4.4"
   },
   "eslintIgnore": [
     "node_modules"
-  ]
+  ],
+  "resolutions": {
+    "rollup-plugin-terser/serialize-javascript": "2.1.1"
+  }
 }
