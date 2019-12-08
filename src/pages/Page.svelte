@@ -26,6 +26,10 @@
   .container {
     margin-block-end: 1rem;
   }
+  .section {
+    max-width: 960px;
+    margin: 0 auto;
+  }
 </style>
 
 <section class="section">
@@ -36,8 +40,9 @@
 
   <div class="tabs is-fullwidth is-medium is-toggle" role="tablist">
     <ul>
-      <li class="is-active">
+      <li data-testid="favourites-tab" class:is-active={favouritesTab}>
         <button
+          type="button"
           class="button is-fullwidth"
           class:is-light={!favouritesTab}
           class:is-white={favouritesTab}
@@ -50,8 +55,9 @@
           My favourite jokes
         </button>
       </li>
-      <li>
+      <li data-testid="random-tab" class:is-active={!favouritesTab}>
         <button
+          type="button"
           class="button is-fullwidth"
           class:is-light={favouritesTab}
           class:is-white={!favouritesTab}

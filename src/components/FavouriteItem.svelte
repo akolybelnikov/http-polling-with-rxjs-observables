@@ -15,7 +15,7 @@
   .panel-icon {
     flex: 10% 0 0;
     margin-right: 0;
-    cursor: pointer;
+    height: 100%;
   }
   .panel-block-container {
     width: 100%;
@@ -23,15 +23,26 @@
     justify-content: space-between;
     align-items: center;
   }
+  .button {
+    border: none;
+  }
 </style>
 
 <div class="panel-block-container">
   <p class="is-size-4-desktop is-size-5-tablet is-size-6-mobile">
     {item.joke.replace(/&quot;/g, '"')}
   </p>
-  <span class="panel-icon" on:click={onRemove}>
-    <i
-      class="fas fa-trash has-text-link is-size-6 is-size-5-tablet"
-      aria-hidden="true" />
-  </span>
+  <div class="panel-icon">
+    <button
+      class="button has-text-link"
+      type="button"
+      on:click={onRemove}
+      on:keydown={onRemove}
+      aria-label={`remove joke ${item.id}`}>
+      <span class="icon">
+        <i class="fas fa-trash is-size-6 is-size-5-tablet" aria-hidden="true" />
+        <span class="is-sr-only">Remove joke</span>
+      </span>
+    </button>
+  </div>
 </div>

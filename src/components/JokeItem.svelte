@@ -75,7 +75,11 @@
       </div>
     </div>
     <div class="media-right">
-      <input type="checkbox" bind:checked={item.saved} on:change={onChange} />
+      <input
+        type="checkbox"
+        id={`saved-${index}`}
+        bind:checked={item.saved}
+        on:change={onChange} />
     </div>
   </article>
 </div>

@@ -79,17 +79,17 @@
 <div class="box" in:fly={{ y: 100, duration: 700 }}>
   <nav class="level is-mobile">
     <div class="level-item">
-      <button id="fetch10" class="button is-info" on:click={fetch10}>
+      <button type="button" id="fetch10" class="button is-info" on:click={fetch10}>
         Fetch jokes
       </button>
     </div>
     <div class="level-item">
       {#if !polling}
-        <button role="button" class="button is-warning" on:click={pollJokes}>
+        <button type="button" class="button is-warning" on:click={pollJokes}>
           Poll jokes
         </button>
       {:else}
-        <button role="button" class="button is-danger" on:click={stopPolling}>
+        <button type="button" class="button is-danger" on:click={stopPolling}>
           Stop polling
         </button>
       {/if}

@@ -4,7 +4,7 @@ import { SvelteComponent } from 'svelte'
 var app: SvelteComponent = new App({
   target: document.body,
   props: {
-    title: 'Chuck Norris API',
+    title: 'Chuck Norris jokes',
     subtitle: 'Polling API with Http Observables',
   },
 })
