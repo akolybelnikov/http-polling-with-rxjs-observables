@@ -41,7 +41,7 @@
     const storedJokes: Joke[] = get(favourites);
     subscription = startPolling()
       .pipe(
-        map((arr: Joke[]): Joke => markedAsSaved(storedJokes, arr[0])),
+        map((arr: Joke[]): Joke => checkIfSaved(storedJokes, arr[0])),
         tap((polledJoke: Joke) => {
           const jokesFromStore: Joke[] = get(jokes);
           jokes.set([...jokesFromStore, polledJoke]);
