@@ -42,9 +42,9 @@ function createWritableStore(key: string, startValue: Joke[]) {
     },
     addJoke: (joke: Joke) => update(jokes => [...jokes, joke]),
     removeJoke: (joke: Joke) =>
-      update(jokes => {
-        let idx = jokes.findIndex(j => j.id === joke.id)
-        return [...jokes.slice(0, idx), ...jokes.slice(idx + 1)]
+      update(favourites => {
+        let idx = favourites.findIndex(j => j.id === joke.id)
+        return [...favourites.slice(0, idx), ...favourites.slice(idx + 1)]
       }),
   }
 }

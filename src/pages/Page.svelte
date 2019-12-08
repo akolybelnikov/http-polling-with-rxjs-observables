@@ -3,7 +3,7 @@
   // @ts-ignore
   import { jokes } from "../store.ts";
   import JokeList from "../components/JokeList.svelte";
-  import FavoriteList from "../components/FavoriteList.svelte";
+  import FavouriteList from "../components/FavouriteList.svelte";
   import ActionsLevel, { fetchJokes } from "../components/ActionsLevel.svelte";
 
   export let title: string;
@@ -43,6 +43,7 @@
           class:is-white={favouritesTab}
           role="tab"
           aria-controls="favourites-panel"
+          tabindex="0"
           aria-selected={favouritesTab}
           on:click={setFavouritesTab}
           id="favourites">
@@ -67,7 +68,7 @@
 
   {#if favouritesTab}
     <div role="tabpanel" id="favourites-panel">
-      <FavoriteList />
+      <FavouriteList />
     </div>
   {:else}
     <div role="tabpanel" id="random-panel">

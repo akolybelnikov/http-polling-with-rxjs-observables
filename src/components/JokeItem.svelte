@@ -1,4 +1,3 @@
-<svelte:options immutable />
 <script lang="ts">
   //import { afterUpdate } from "svelte";
   // @ts-ignore
@@ -8,10 +7,6 @@
 
   export let item: Joke;
   export let index: number;
-
-  // afterUpdate(() => {
-  //   console.log(`Item "${item.id}" updated: "${item.saved}"`);
-  // });
 
   const onChange = (): void => {
     jokes.updateProp(item.id, item.saved);
@@ -57,6 +52,7 @@
   }
 </style>
 
+<svelte:options immutable />
 <div class="list-item" class:has-background-light={item.saved}>
   <article class="media">
     <div class="media-left">
@@ -71,9 +67,10 @@
       <div class="content">
         <p
           class:has-text-grey-dark={item.saved}
-          class="is-size-4-desktop is-size-5-tablet is-size-6-mobile has-text-centered"
+          class="is-size-4-desktop is-size-5-tablet is-size-6-mobile
+          has-text-centered"
           class:has-text-grey-darker={item.saved}>
-          {item ? item.joke.replace(/&quot;/g, '"') : ''}
+          {item.joke.replace(/&quot;/g, '"')}
         </p>
       </div>
     </div>
