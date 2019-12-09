@@ -37,11 +37,7 @@ export default {
             css: css => {
                 css.write('public/build/bundle.css')
             },
-            preprocess: preprocess(opts),
-            onwarn: (warning, handler) => {
-                if ((warning.code = 'a11y-missing-attribute')) return
-                handler(warning)
-            },
+            preprocess: preprocess(opts)
         }),
         resolve({
             browser: true,
