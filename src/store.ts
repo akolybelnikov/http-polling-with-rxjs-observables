@@ -1,13 +1,20 @@
-import { writable } from 'svelte/store'
+import { writable, Writable } from 'svelte/store'
 import { Joke } from './types'
 
 const data: Joke[] = []
+interface WritableJokes<T> extends Writable<T>{
+  updateProp?(id: number, saved: boolean): void;
+  useLocalStorage?(): void;
+  addJoke?(joke: Joke): void;
+  removeJoke?(joke: Joke): void;
+}
 
-function watchJokes() {
+function watchJokes(): WritableJokes<Joke[]> {
   const { subscribe, update, set } = writable(data)
   return {
     subscribe,
     set,
+    update,
     updateProp: (id: number, saved: boolean) => {
       update(jokes => {
         let idx = jokes.findIndex(j => j.id === id)
@@ -24,12 +31,13 @@ function watchJokes() {
   }
 }
 
-function createWritableStore(key: string, startValue: Joke[]) {
+function createWritableStore(key: string, startValue: Joke[]): WritableJokes<Joke[]> {
   const { subscribe, set, update } = writable(startValue)
 
   return {
     subscribe,
     set,
+    update,
     useLocalStorage: () => {
       const json = localStorage.getItem(key)
       if (json) {
@@ -49,11 +57,11 @@ function createWritableStore(key: string, startValue: Joke[]) {
   }
 }
 
-export const jokes = watchJokes()
+export const jokes: WritableJokes<Joke[]> = watchJokes()
 
 let storedJokes: Joke[] = []
 const json = localStorage.getItem('favourites')
 if (json) {
   storedJokes = JSON.parse(json)
 }
-export const favourites = createWritableStore('favourites', storedJokes)
+export const favourites: WritableJokes<Joke[]> = createWritableStore('favourites', storedJokes)

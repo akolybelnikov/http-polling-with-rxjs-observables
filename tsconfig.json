@@ -9,7 +9,7 @@
     "moduleResolution": "node",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["@pyoner/svelte-types"],
+    "types": ["@pyoner/svelte-types", "svelte"],
     "noUnusedLocals": false
   },
   "include": ["src"],
