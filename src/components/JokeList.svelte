@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { afterUpdate } from 'svelte'
+    // import { afterUpdate } from 'svelte'
     import { fade } from 'svelte/transition'
     import { get } from 'svelte/store'
     // @ts-ignore
@@ -19,11 +19,11 @@
 
     let jokeNode: HTMLElement
 
-    afterUpdate(() => {
-      if (jokeNode) {
-        jokeNode.scrollIntoView({ behavior: 'smooth' })
-      }
-    })
+    // afterUpdate(() => {
+    //   if (jokeNode) {
+    //     jokeNode.scrollIntoView({ behavior: 'smooth' })
+    //   }
+    // })
 </script>
 
 <div class="box">
