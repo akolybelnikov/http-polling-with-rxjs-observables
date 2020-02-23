@@ -2,7 +2,7 @@ import { from, Observable, timer } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
 import { Joke } from './types'
 
-const URL = 'http://api.icndb.com/jokes/random/'
+const URL = 'https://api.icndb.com/jokes/random/'
 
 // We parse XHR response and return the JSON as a Promise of an array of interface Joke
 async function mapResponse(res: any): Promise<Joke[] | null> {
